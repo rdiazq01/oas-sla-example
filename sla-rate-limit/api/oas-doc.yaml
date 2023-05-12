@@ -1,117 +1,53 @@
 openapi: 3.0.3
 info:
   version: 1.0.0
-  title: Team API
-  description: Team api 
+  title: Stat API
+  description: Stat api 
   x-sla:
     $ref: ./plans.yaml
 security:
   - BearerAuth: []
 paths:
-  /api/v1/teams:
-    x-router-controller: teamsController
+  /api/v1/stats:
+    x-router-controller: statController
     get:
-      description: Returns all teams
-      operationId: getTeams
+      description: Returns all stats
+      operationId: getStats
       responses:
         200:
-          description: Team list
+          description: Stat list
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/team'
+                  $ref: '#/components/schemas/stat'
         default:
           description: Unexpected error
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-    post:
-      description: Creates a new team
-      operationId: addTeam
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/team'
-        description: Team to be created
-        required: true
-      responses:
-        201:
-          description: Team
-        default:
-            description: Unexpected error
-            content:
-              application/json:
-                schema:
-                  $ref: '#/components/schemas/error'
-                  
-  /api/v1/teams/{id}:
-    x-router-controller: teamsController
+                 
+  /api/v1/stats/{id}:
+    x-router-controller: statController
     get:
-      description: Returns a single team by its id
+      description: Returns a single stat by its id
       operationId: findByid
       parameters:
         - required: true
           name: id
-          description: id of the team to fetch
+          description: id of the stat to fetch
           in: path
           schema:
             type: number
       responses:
         200:
-          description: Team found by id
+          description: Stat found by id
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/team'
-        default:
-          description: Unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/error'
-    put:
-      description: Update a team based on its id
-      operationId: updateTeam
-      parameters:
-        - required: true
-          name: id
-          description: id of the team to update
-          in: path
-          schema:
-            type: number
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/team'
-        description: Team to be updated
-        required: true
-      responses:
-        '204':
-          description: Team updated
-        default:
-          description: Unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/error'
-    delete:
-      description: Deletes a single team based on its id
-      operationId: deleteTeam
-      parameters:
-        - required: true
-          name: id
-          description: id of the team to delete
-          in: path
-          schema:
-            type: number
-      responses:
-        '204':
-          description: Team deleted
+                $ref: '#/components/schemas/stat'
         default:
           description: Unexpected error
           content:
@@ -126,25 +62,21 @@ components:
       scheme: bearer
       bearerFormat: JWT
   schemas:
-    team:
+    stat:
         type: object
         required:
-          - id
+          - period
         properties:
-          id:
+          period:
             type: number
-          name:
+          territory:
             type: string
-          code:
-            type: string
-          country:
-            type: string
-          founded:
+          finished_house:
             type: number
-          national:
-            type: boolean
-          logo:
-            type: string
+          half_price_m_two:
+            type: number
+          tourist:
+            type: number
     error:
       type: object
       required:

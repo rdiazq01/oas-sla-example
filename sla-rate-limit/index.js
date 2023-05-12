@@ -4,7 +4,7 @@ import config from "./oas-tools.config.js"
 import { initialize, use } from "@oas-tools/core";
 import { SLARateLimit } from "@oas-tools/sla-rate-limit";
 
-const serverPort = 8080;
+const serverPort = 8090;
 const app = express();
 app.use(express.json({limit: '50mb'}));
 

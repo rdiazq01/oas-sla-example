@@ -2,11 +2,12 @@ import { run } from "apipecker";
 import jwt from "jsonwebtoken";
 
 function myUrlBuilder(){
-    return "http://localhost:8080/api/v1/teams";
+    return "http://localhost:8090/api/v1/stats";
 }
 
 function myRequestBuilder(user){
-    const token = jwt.sign({plan: "base", apikey: user}, process.env.JWT_SECRET, {issuer: process.env.JWT_ISSUER});
+    const token = jwt.sign({plan: "base", apikey: user}, 
+    process.env.JWT_SECRET, {issuer: process.env.JWT_ISSUER});
     
     return {
         options : {
